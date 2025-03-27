@@ -1,6 +1,12 @@
 package org.example;
 
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.net.URLEncodedUtils;
+
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Request {
@@ -26,7 +32,7 @@ public class Request {
     }
 
     private void parseQueryParams(String queryString) {
-        List<NameValuePair> params = URLEncodedUtils.parse(queryString, java.nio.charset.StandardCharsets.UTF_8);
+        List<NameValuePair> params = URLEncodedUtils.parse(URI.create("http://dummy.com?" + queryString), StandardCharsets.UTF_8);
         for (NameValuePair param : params) {
             queryParams.put(param.getName(), param.getValue());
         }
